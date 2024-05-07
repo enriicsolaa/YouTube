@@ -1,0 +1,31 @@
+name: YT Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install Azule
+      run: |
+        git clone https://github.com/Al4ise/Azule ~/Azule
+        sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+
+    - name: Clone YTLitePlus Repository
+      run: git clone https://github.com/YTLitePlus/YTLitePlus.git
+
+    - name: Change Directory to YTLitePlus
+      run: cd YTLitePlus
+
+    - name: Check Azule Help
+      run: azule -h
