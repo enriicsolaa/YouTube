@@ -16,19 +16,15 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Install Azule
+    - name: Install PyZule
       run: |
-        git clone https://github.com/Al4ise/Azule ~/Azule
-        sudo ln -sf ~/Azule/azule /usr/local/bin/azule
+        bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
 
-    - name: Clone YTLitePlus Repository
-      run: git clone https://github.com/YTLitePlus/YTLitePlus.git
+    - name: test
+      run: ls
 
-    - name: Change Directory to YTLitePlus
-      run: cd YTLitePlus
-
-    - name: Check Azule Help
-      run: azule -h
+    - name: Pyzule help
+      run: pyzule -h
 
     - name: Get os info
       run: sysctl -a | grep machdep.cpu
