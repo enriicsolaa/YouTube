@@ -10,7 +10,6 @@
 [submodule "Tweaks/DontEatMyContent"]
 	path = Tweaks/DontEatMyContent
 	url = https://github.com/therealFoxster/DontEatMyContent
-	
 [submodule "Tweaks/ReturnYouTubeDislikesDD"]
 	path = Tweaks/ReturnYouTubeDislikesDD
 	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
