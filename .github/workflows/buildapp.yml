@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macOS-11
 
     steps:
     - name: Checkout Repository
@@ -29,3 +29,6 @@ jobs:
 
     - name: Check Azule Help
       run: azule -h
+
+    - name: Get os info
+      run: sysctl -a | grep machdep.cpu
