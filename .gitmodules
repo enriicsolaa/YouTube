@@ -4,15 +4,15 @@
 [submodule "Tweaks/iSponsorBlock"]
 	path = Tweaks/iSponsorBlock
 	url = https://github.com/Galactic-Dev/iSponsorBlock
+[submodule "Tweaks/ReturnYouTubeDislikes"]
+	path = Tweaks/ReturnYouTubeDislikes
+	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
 [submodule "Tweaks/YouTubeX"]
 	path = Tweaks/YouTubeX
 	url = https://github.com/PoomSmart/YouTube-X
 [submodule "Tweaks/DontEatMyContent"]
 	path = Tweaks/DontEatMyContent
 	url = https://github.com/therealFoxster/DontEatMyContent
-[submodule "Tweaks/ReturnYouTubeDislikes"]
-	path = Tweaks/ReturnYouTubeDislikes
-	url = https://github.com/arichornloverALT/Return-YouTube-Dislikes
 [submodule "Tweaks/YTUHD"]
 	path = Tweaks/YTUHD
 	url = https://github.com/PoomSmart/YTUHD

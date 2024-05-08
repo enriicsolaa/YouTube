@@ -23,7 +23,6 @@ jobs:
     - name: Compile plugins
       run: |
         cd Tweaks
-        
 
     - name: Pyzule
       run: pyzule-gen
