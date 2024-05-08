@@ -16,13 +16,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Install PyZule
+    - name: Install pyzule
       run: |
         bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
-        bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule-gen/main/install-pyzule-gen.sh)"
 
-    - name: test
-      run: pyzule -h
+    - name: Compile plugins
+      run: |
+        cd Tweaks
+        
 
     - name: Pyzule
       run: pyzule-gen
