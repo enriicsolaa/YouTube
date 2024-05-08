@@ -10,6 +10,33 @@
 [submodule "Tweaks/DontEatMyContent"]
 	path = Tweaks/DontEatMyContent
 	url = https://github.com/therealFoxster/DontEatMyContent
-[submodule "Tweaks/ReturnYouTubeDislikesDD"]
-	path = Tweaks/ReturnYouTubeDislikesDD
-	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
+[submodule "Tweaks/ReturnYouTubeDislikes"]
+	path = Tweaks/ReturnYouTubeDislikes
+	url = https://github.com/arichornloverALT/Return-YouTube-Dislikes
+[submodule "Tweaks/YTUHD"]
+	path = Tweaks/YTUHD
+	url = https://github.com/PoomSmart/YTUHD
+[submodule "Tweaks/IAmYouTube"]
+	path = Tweaks/IAmYouTube
+	url = https://github.com/PoomSmart/IAmYouTube
+[submodule "Tweaks/NoYTPremium"]
+	path = Tweaks/NoYTPremium
+	url = https://github.com/PoomSmart/NoYTPremium
+[submodule "Tweaks/YTClassicVideoQuality"]
+	path = Tweaks/YTClassicVideoQuality
+	url = https://github.com/PoomSmart/YTClassicVideoQuality
+[submodule "Tweaks/YouPiP"]
+	path = Tweaks/YouPiP
+	url = https://github.com/PoomSmart/YouPiP
+[submodule "Tweaks/YTMiniplayerEnabler"]
+	path = Tweaks/YTMiniplayerEnabler
+	url = https://github.com/level3tjg/YTMiniplayerEnabler
+[submodule "Tweaks/YTShortsProgress"]
+	path = Tweaks/YTShortsProgress
+	url = https://github.com/PoomSmart/YTShortsProgress
+[submodule "Tweaks/YTABConfig"]
+	path = Tweaks/YTABConfig
+	url = https://github.com/PoomSmart/YTABConfig
+[submodule "Tweaks/LookImPremium"]
+	path = Tweaks/LookImPremium
+	url = https://github.com/enriicsolaa/LookImPremium
