@@ -19,12 +19,13 @@ jobs:
     - name: Install PyZule
       run: |
         bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
+        bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule-gen/main/install-pyzule-gen.sh)"
 
     - name: test
-      run: ls
-
-    - name: Pyzule help
       run: pyzule -h
+
+    - name: Pyzule
+      run: pyzule-gen
 
     - name: Get os info
       run: sysctl -a | grep machdep.cpu
