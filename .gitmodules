@@ -40,3 +40,6 @@
 [submodule "Tweaks/ReturnYouTubeDislikes"]
 	path = Tweaks/ReturnYouTubeDislikes
 	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
+[submodule "Extensions"]
+	path = Extensions
+	url = https://github.com/CokePokes/YoutubeExtensions
