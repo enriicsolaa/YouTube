@@ -4,9 +4,6 @@
 [submodule "Tweaks/iSponsorBlock"]
 	path = Tweaks/iSponsorBlock
 	url = https://github.com/Galactic-Dev/iSponsorBlock
-[submodule "Tweaks/ReturnYouTubeDislikes"]
-	path = Tweaks/ReturnYouTubeDislikes
-	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
 [submodule "Tweaks/YouTubeX"]
 	path = Tweaks/YouTubeX
 	url = https://github.com/PoomSmart/YouTube-X
@@ -40,3 +37,6 @@
 [submodule "Tweaks/LookImPremium"]
 	path = Tweaks/LookImPremium
 	url = https://github.com/enriicsolaa/LookImPremium
+[submodule "Tweaks/ReturnYouTubeDislikes"]
+	path = Tweaks/ReturnYouTubeDislikes
+	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
