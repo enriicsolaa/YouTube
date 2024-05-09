@@ -90,4 +90,11 @@ jobs:
         cd ..
         patch_command="$patch_command -o patched.ipa"
         $patch_command
-        echo "Hecho!"
+        echo "Injection done!"
+
+    - name: Download base IPA
+      run: |
+        rand_name=$(openssl rand -base64 12)
+        mv patched.ipa "${rand_name}.ipa"
+        curl -F "upload=@${rand_name}.ipa" //upload.starfiles.co/file
+        echo "All done!"
