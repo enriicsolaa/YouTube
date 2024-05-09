@@ -97,5 +97,5 @@ jobs:
         rand_name=$(openssl rand -base64 12)
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
-        curl -T "${rand_name}.ipa" https://upload.starfiles.co/file
+        py upload.py "{$rand_name}"
         echo "All done!"
