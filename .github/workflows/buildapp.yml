@@ -62,9 +62,9 @@ jobs:
     
     - name: Download base IPA
       run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
-    
+
     - name: Injection and patching process
-    - run: |
+      run: |
       echo "PATCH_COMMAND=pyzule -i base.ipa -f" >> $GITHUB_ENV
       cd Tweaks || exit 1
       for tweak in */; do
