@@ -13,7 +13,7 @@ jobs:
     runs-on: macOS-latest
 
   steps:
-    - name: Checkout Main
+    - name: Checkout prova
       uses: actions/checkout@v4.1.1      
       with:
         path: main
