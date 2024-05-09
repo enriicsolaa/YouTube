@@ -64,7 +64,7 @@ jobs:
       run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
     
     - name: Injection and patching process
-    - run: |
+      run: |
         patch_command="pyzule -i base.ipa -f"
         cd Tweaks
         for tweak in */; do
