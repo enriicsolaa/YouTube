@@ -12,64 +12,39 @@ jobs:
   build:
     runs-on: macOS-latest
 
-  steps:
-    - name: Checkout prova
-      uses: actions/checkout@v4.1.1      
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
       with:
-        path: main
-        submodules: recursive
+      - submodules: true
 
-    - name: Install Dependencies
-      run: brew install make
-
-    - name: Set PATH environment variable
-      run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
-
-    - name: Setup Theos
-      uses: actions/checkout@v4.1.1
-      with:
-        repository: theos/theos
-        ref: master
-        path: theos
-        submodules: recursive
-    
-    - name: SDK Caching
-      id: SDK
-      uses: actions/cache@v4.0.2
-      env:
-        cache-name: iOS-16.4-SDK
-      with:
-        path: theos/sdks/
-        key: ${{ env.cache-name }}
-        restore-keys: ${{ env.cache-name }}
-
-    - name: Download iOS SDK
-      if: steps.SDK.outputs.cache-hit != 'true'
+    - name: Check cache
       run: |
-        git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/arichornlover/sdks/
-        cd sdks
-        git sparse-checkout set --no-cone iPhoneOS16.4.sdk
-        git checkout
-        mv *.sdk $THEOS/sdks
-      env:
-        THEOS: ${{ github.workspace }}/theos
+        echo upstream_heads=`git ls-remote https://github.com/theos/theos | head -n 1 | cut -f 1`-`git ls-remote https://github.com/theos/sdks | head -n 1 | cut -f 1` >> $GITHUB_ENV
 
-    - name: Install pyzule
+    - name: Use cache
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}/theos
+        key: ${{ runner.os }}-${{ env.upstream_heads }}
+    
+    - name: Prepare Theos
+    - uses: Randomblock1/theos-action@v1
+      with:
+        orion: 'false'
+
+    - name: Install Pyzule
       run: |
         bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
 
-    - name: Install Theos
-      run: |
-        brew install make
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
-
     - name: Compile Tweaks
       run: |
-        ls
         cd Tweaks
         for tweak in */; do
           echo "Compiling $tweak"
           cd "$tweak"
+          rm -f packages/*
           make package FINALPACKAGE=1
           echo "$tweak successfully compiled"
           cd ..
