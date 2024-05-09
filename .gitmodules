@@ -34,12 +34,12 @@
 [submodule "Tweaks/LookImPremium"]
 	path = Tweaks/LookImPremium
 	url = https://github.com/enriicsolaa/LookImPremium
-[submodule "Tweaks/ReturnYouTubeDislikes"]
-	path = Tweaks/ReturnYouTubeDislikes
-	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
 [submodule "Extensions"]
 	path = Extensions
 	url = https://github.com/CokePokes/YoutubeExtensions
 [submodule "Tweaks/YTSideloadFix"]
 	path = Tweaks/YTSideloadFix
 	url = https://github.com/jawshoeadan/YTSideloadFix
+[submodule "Tweaks/Return-YouTube-Dislikes"]
+	path = Tweaks/Return-YouTube-Dislikes
+	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
