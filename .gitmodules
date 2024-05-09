@@ -37,6 +37,3 @@
 [submodule "Tweaks/Return-YouTube-Dislikes"]
 	path = Tweaks/Return-YouTube-Dislikes
 	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
-[submodule "Tweaks/YTSideloadFix"]
-	path = Tweaks/YTSideloadFix
-	url = https://github.com/enriicsolaa/YTSideloadFix
