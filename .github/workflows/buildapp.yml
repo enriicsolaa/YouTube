@@ -45,7 +45,7 @@ jobs:
           cd "$tweak"
           git submodule update --init --recursive
           rm -f packages/*
-          make package FINALPACKAGE=1
+          make package FINALPACKAGE=1 ROOTLESS=1
           echo "$tweak successfully compiled"
           cd ..
         done
