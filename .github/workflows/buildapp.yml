@@ -32,6 +32,12 @@ jobs:
       uses: Randomblock1/theos-action@v1
       with:
         orion: 'false'
+    
+    - name: Prepare app headers
+      run: |
+        git clone https://github.com/PoomSmart/YouTubeHeader
+        cp -r YouTubeHeader $THEOS/include/
+        rm -r YouTubeHeader
 
     - name: Compile Tweaks
       run: |
@@ -41,7 +47,7 @@ jobs:
           cd "$tweak"
           git submodule update --init --recursive
           rm -f packages/*
-          make package FINALPACKAGE=1 ROOTLESS=1
+          make package FINALPACKAGE=1
           echo "$tweak successfully compiled"
           cd ..
         done
