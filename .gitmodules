@@ -22,9 +22,6 @@
 [submodule "Tweaks/YouPiP"]
 	path = Tweaks/YouPiP
 	url = https://github.com/PoomSmart/YouPiP
-[submodule "Tweaks/YTMiniplayerEnabler"]
-	path = Tweaks/YTMiniplayerEnabler
-	url = https://github.com/level3tjg/YTMiniplayerEnabler
 [submodule "Tweaks/YTShortsProgress"]
 	path = Tweaks/YTShortsProgress
 	url = https://github.com/PoomSmart/YTShortsProgress
