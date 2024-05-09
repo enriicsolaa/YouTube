@@ -20,12 +20,20 @@ jobs:
       run: |
         bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
 
-    - name: Compile plugins
+    - name: Install Theos
+      run: |
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/theos/theos/master/bin/install-theos)"
+
+    - name: Compile Tweaks
       run: |
         cd Tweaks
-
-    - name: Pyzule
-      run: pyzule-gen
+        for tweak in */; do
+          echo "Compiling $tweak"
+          cd "$tweak"
+          make package FINALPACKAGE=1
+          echo "$tweak successfully compiled"
+          cd ..
+        done
 
     - name: Get os info
       run: sysctl -a | grep machdep.cpu
