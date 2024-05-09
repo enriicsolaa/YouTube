@@ -66,10 +66,10 @@ jobs:
     - name: Injection and patching process
     - run: |
       patch_command="pyzule -i base.ipa -f"
-      cd Tweaks
+      cd Tweaks || exit 1
       for tweak in */; do
-        cd $tweak
-        cd packages
+        cd "$tweak" || exit 1
+        cd packages || exit 1
         for tweak_file in *; do
           patch_command="$patch_command Tweaks/$tweak/packages/$tweak_file"
         done
@@ -77,16 +77,16 @@ jobs:
         cd ..
       done
       cd ..
-      cd CompiledTweaks
+      cd CompiledTweaks || exit 1
       for compiledt in *; do
-        patch_command="$patch_command CompiledTweaks/$compiledt
+        patch_command="$patch_command CompiledTweaks/$compiledt"
       done
       cd ..
-      cd Extensions
+      cd Extensions || exit 1
       for ext in */; do
-        patch_command="$patch_command Extensions/$ext
+        patch_command="$patch_command Extensions/$ext"
       done
       cd ..
       patch_command="$patch_command -o patched.ipa"
-      $patch_command
-      echo "Done!"
+      eval "$patch_command" || exit 1
+      echo "¡Hecho!"
