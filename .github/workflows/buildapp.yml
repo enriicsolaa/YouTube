@@ -32,6 +32,9 @@ jobs:
       uses: Randomblock1/theos-action@v1
       with:
         orion: 'true'
+    
+    - name: Install dependencies
+      run: brew install swiftlint
 
     - name: Install Pyzule
       run: |
