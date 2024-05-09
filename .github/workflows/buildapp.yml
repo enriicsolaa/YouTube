@@ -35,9 +35,14 @@ jobs:
     
     - name: Prepare app headers
       run: |
-        git clone https://github.com/PoomSmart/YouTubeHeader
-        cp -r YouTubeHeader $THEOS/include/
-        rm -r YouTubeHeader
+        if [ ! -d "$THEOS/include/YouTubeHeader" ]; then
+          echo "Installing app headers..."
+          git clone https://github.com/PoomSmart/YouTubeHeader
+          cp -r YouTubeHeader "$THEOS/include/"
+          rm -r YouTubeHeader
+        else
+          echo "Headers already installed as theos libs."
+        fi
 
     - name: Compile Tweaks
       run: |
