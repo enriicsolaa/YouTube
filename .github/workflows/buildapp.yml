@@ -33,6 +33,11 @@ jobs:
       with:
         orion: 'false'
     
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+    
     - name: Prepare app headers
       run: |
         openssl rand -base64 12
@@ -91,6 +96,9 @@ jobs:
         patch_command="$patch_command -o patched.ipa"
         $patch_command
         echo "Injection done!"
+    
+    - name: Install python deps
+      run: pip install -r requirements.txt
 
     - name: Upload ipa
       run: |
@@ -98,6 +106,5 @@ jobs:
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
         pip install starfiles
-        chmod +x upload.py
-        $PYTHON upload.py "{$rand_name}.ipa"
+        python upload.py "{$rand_name}.ipa"
         echo "All done!"
