@@ -57,6 +57,13 @@ jobs:
           echo "$tweak successfully compiled"
           cd ..
         done
+    
+    - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install starfiles
 
     - name: Install pyzule
       run: bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
@@ -97,7 +104,5 @@ jobs:
         rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
-        python3 -m ensurepip
-        pip install starfiles
         py upload.py "{$rand_name}.ipa"
         echo "All done!"
