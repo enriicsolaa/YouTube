@@ -65,13 +65,13 @@ jobs:
     
     - name: Injection and patching process
     - run: |
-      patch_command="pyzule -i base.ipa -f"
+      echo "PATCH_COMMAND=pyzule -i base.ipa -f" >> $GITHUB_ENV
       cd Tweaks || exit 1
       for tweak in */; do
         cd "$tweak" || exit 1
         cd packages || exit 1
         for tweak_file in *; do
-          patch_command="$patch_command Tweaks/$tweak/packages/$tweak_file"
+          echo "PATCH_COMMAND=${PATCH_COMMAND} Tweaks/$tweak/packages/$tweak_file" >> $GITHUB_ENV
         done
         cd ..
         cd ..
@@ -79,14 +79,14 @@ jobs:
       cd ..
       cd CompiledTweaks || exit 1
       for compiledt in *; do
-        patch_command="$patch_command CompiledTweaks/$compiledt"
+        echo "PATCH_COMMAND=${PATCH_COMMAND} CompiledTweaks/$compiledt" >> $GITHUB_ENV
       done
       cd ..
       cd Extensions || exit 1
       for ext in */; do
-        patch_command="$patch_command Extensions/$ext"
+        echo "PATCH_COMMAND=${PATCH_COMMAND} Extensions/$ext" >> $GITHUB_ENV
       done
       cd ..
-      patch_command="$patch_command -o patched.ipa"
-      eval "$patch_command" || exit 1
-      echo "¡Hecho!"
+      echo "PATCH_COMMAND=${PATCH_COMMAND} -o patched.ipa" >> $GITHUB_ENV
+      eval "$PATCH_COMMAND" || exit 1
+      echo "Hecho!"
