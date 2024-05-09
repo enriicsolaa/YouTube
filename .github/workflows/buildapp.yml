@@ -63,30 +63,30 @@ jobs:
     - name: Download base IPA
       run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
 
-    - name: Injection and patching process
+    - name: Injection
       run: |
-      echo "PATCH_COMMAND=pyzule -i base.ipa -f" >> $GITHUB_ENV
-      cd Tweaks || exit 1
-      for tweak in */; do
-        cd "$tweak" || exit 1
-        cd packages || exit 1
-        for tweak_file in *; do
-          echo "PATCH_COMMAND=${PATCH_COMMAND} Tweaks/$tweak/packages/$tweak_file" >> $GITHUB_ENV
+        echo "PATCH_COMMAND=pyzule -i base.ipa -f" >> $GITHUB_ENV
+        cd Tweaks || exit 1
+        for tweak in */; do
+          cd "$tweak" || exit 1
+          cd packages || exit 1
+          for tweak_file in *; do
+            echo "PATCH_COMMAND=${PATCH_COMMAND} Tweaks/$tweak/packages/$tweak_file" >> $GITHUB_ENV
+          done
+          cd ..
+          cd ..
         done
         cd ..
+        cd CompiledTweaks || exit 1
+        for compiledt in *; do
+          echo "PATCH_COMMAND=${PATCH_COMMAND} CompiledTweaks/$compiledt" >> $GITHUB_ENV
+        done
         cd ..
-      done
-      cd ..
-      cd CompiledTweaks || exit 1
-      for compiledt in *; do
-        echo "PATCH_COMMAND=${PATCH_COMMAND} CompiledTweaks/$compiledt" >> $GITHUB_ENV
-      done
-      cd ..
-      cd Extensions || exit 1
-      for ext in */; do
-        echo "PATCH_COMMAND=${PATCH_COMMAND} Extensions/$ext" >> $GITHUB_ENV
-      done
-      cd ..
-      echo "PATCH_COMMAND=${PATCH_COMMAND} -o patched.ipa" >> $GITHUB_ENV
-      eval "$PATCH_COMMAND" || exit 1
-      echo "Hecho!"
+        cd Extensions || exit 1
+        for ext in */; do
+          echo "PATCH_COMMAND=${PATCH_COMMAND} Extensions/$ext" >> $GITHUB_ENV
+        done
+        cd ..
+        echo "PATCH_COMMAND=${PATCH_COMMAND} -o patched.ipa" >> $GITHUB_ENV
+        eval "$PATCH_COMMAND" || exit 1
+        echo "Hecho!"
