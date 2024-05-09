@@ -35,7 +35,7 @@ jobs:
     
     - name: Prepare app headers
       run: |
-        echo openssl rand -base64 12
+        openssl rand -base64 12
         if [ ! -d "$THEOS/include/YouTubeHeader" ]; then
           echo "Installing app headers..."
           git clone https://github.com/PoomSmart/YouTubeHeader
