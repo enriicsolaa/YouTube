@@ -44,7 +44,7 @@ jobs:
           echo "Compiling $tweak"
           cd "$tweak"
           rm -f packages/*
-          make package FINALPACKAGE=1
+          make package FINALPACKAGE=1 ROOTLESS=1
           echo "$tweak successfully compiled"
           cd ..
         done
