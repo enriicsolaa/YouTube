@@ -34,9 +34,6 @@
 [submodule "Extensions"]
 	path = Extensions
 	url = https://github.com/CokePokes/YoutubeExtensions
-[submodule "Tweaks/YTSideloadFix"]
-	path = Tweaks/YTSideloadFix
-	url = https://github.com/jawshoeadan/YTSideloadFix
 [submodule "Tweaks/Return-YouTube-Dislikes"]
 	path = Tweaks/Return-YouTube-Dislikes
 	url = https://github.com/PoomSmart/Return-YouTube-Dislikes
