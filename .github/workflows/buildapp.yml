@@ -62,16 +62,16 @@ jobs:
     
     - name: Download base IPA
       run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
-
-    - name: Injection
-      run: |
-        echo "PATCH_COMMAND=pyzule -i base.ipa -f" >> $GITHUB_ENV
+    
+    - name: Injection and patching process
+    - run: |
+        patch_command="pyzule -i base.ipa -f"
         cd Tweaks || exit 1
         for tweak in */; do
           cd "$tweak" || exit 1
           cd packages || exit 1
           for tweak_file in *; do
-            echo "PATCH_COMMAND=${PATCH_COMMAND} Tweaks/$tweak/packages/$tweak_file" >> $GITHUB_ENV
+            patch_command="$patch_command Tweaks/$tweak/packages/$tweak_file"
           done
           cd ..
           cd ..
@@ -79,14 +79,14 @@ jobs:
         cd ..
         cd CompiledTweaks || exit 1
         for compiledt in *; do
-          echo "PATCH_COMMAND=${PATCH_COMMAND} CompiledTweaks/$compiledt" >> $GITHUB_ENV
+          patch_command="$patch_command CompiledTweaks/$compiledt"
         done
         cd ..
         cd Extensions || exit 1
         for ext in */; do
-          echo "PATCH_COMMAND=${PATCH_COMMAND} Extensions/$ext" >> $GITHUB_ENV
+          patch_command="$patch_command Extensions/$ext"
         done
         cd ..
-        echo "PATCH_COMMAND=${PATCH_COMMAND} -o patched.ipa" >> $GITHUB_ENV
-        echo $PATCH_COMMAND
+        patch_command="$patch_command -o patched.ipa"
+        eval "$patch_command" || exit 1
         echo "Hecho!"
