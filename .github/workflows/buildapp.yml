@@ -94,8 +94,8 @@ jobs:
 
     - name: Upload ipa
       run: |
-        rand_name=$(openssl rand -base64 12)
+        rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
-        py upload.py "{$rand_name}"
+        py upload.py "{$rand_name}.ipa"
         echo "All done!"
