@@ -31,14 +31,7 @@ jobs:
     - name: Prepare Theos
       uses: Randomblock1/theos-action@v1
       with:
-        orion: 'true'
-    
-    - name: Install dependencies
-      run: brew install swiftlint ldid
-
-    - name: Install Pyzule
-      run: |
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
+        orion: 'false'
 
     - name: Compile Tweaks
       run: |
