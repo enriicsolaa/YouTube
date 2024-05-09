@@ -15,6 +15,10 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+    
+    - name: Initialize and update submodules
+      run: |
+        git submodule update --init --recursive
 
     - name: Install pyzule
       run: |
@@ -27,6 +31,7 @@ jobs:
 
     - name: Compile Tweaks
       run: |
+        ls
         cd Tweaks
         for tweak in */; do
           echo "Compiling $tweak"
