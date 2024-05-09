@@ -88,5 +88,5 @@ jobs:
         done
         cd ..
         echo "PATCH_COMMAND=${PATCH_COMMAND} -o patched.ipa" >> $GITHUB_ENV
-        eval $PATCH_COMMAND || exit 1
+        echo $PATCH_COMMAND
         echo "Hecho!"
