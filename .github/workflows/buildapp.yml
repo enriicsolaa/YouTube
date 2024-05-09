@@ -97,5 +97,7 @@ jobs:
         rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
+        python3 -m ensurepip
+        pip install starfiles
         py upload.py "{$rand_name}.ipa"
         echo "All done!"
