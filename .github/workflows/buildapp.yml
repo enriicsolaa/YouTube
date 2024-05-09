@@ -109,7 +109,10 @@ jobs:
           fi
           chunk_length=$((end_byte - start_byte + 1))
           chunk_data=$(dd bs=1 if="$file_path" skip=$start_byte count=$chunk_length 2>/dev/null | base64)
-          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" -F "number_of_chunks=$total_chunks" -F "chunk_number=$((i + 1))" -F "file_chunk=$chunk_data" https://upload.starfiles.co/file
+          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" \
+              -F "number_of_chunks=$total_chunks" \
+              -F "chunk_number=$((i + 1))" \
+              -F "file_chunk=$chunk_data" \
+              https://upload.starfiles.co/file
         done
         echo "All done!"
-        
