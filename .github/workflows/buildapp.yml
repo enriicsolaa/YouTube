@@ -33,11 +33,6 @@ jobs:
       with:
         orion: 'false'
     
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'
-    
     - name: Prepare app headers
       run: |
         openssl rand -base64 12
@@ -96,14 +91,21 @@ jobs:
         patch_command="$patch_command -o patched.ipa"
         $patch_command
         echo "Injection done!"
-    
-    - name: Install python deps
-      run: pip install -r requirements.txt
 
     - name: Upload ipa
       run: |
         rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
+        file_path="${rand_name}.ipa"
         echo "$rand_name"
-        mv patched.ipa "${rand_name}.ipa"
-        python upload.py "${rand_name}.ipa"
+        mv patched.ipa "${file_path}"
+        chunk_size=2097152
+        total_chunks=$(($(stat -c%s "$file_path") / $chunk_size + 1))
+        for ((i = 0; i < $total_chunks; i++)); do
+          start_byte=$(($i * $chunk_size))
+          end_byte=$(($start_byte + $chunk_size - 1))
+          if [ $end_byte -gt $(stat -c%s "$file_path") ]; then
+            end_byte=$(stat -c%s "$file_path")
+          fi
+          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" -F "number_of_chunks=$total_chunks" -F "chunk_number=$((i + 1))" -F "file_chunk=@<(dd bs=1 if=$file_path skip=$start_byte count=$((end_byte - start_byte + 1) 2>/dev/null | base64))" https://upload.starfiles.co/file
+        done
         echo "All done!"
