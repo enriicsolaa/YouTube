@@ -92,9 +92,10 @@ jobs:
         $patch_command
         echo "Injection done!"
 
-    - name: Download base IPA
+    - name: Upload ipa
       run: |
         rand_name=$(openssl rand -base64 12)
+        echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
-        curl -F "upload=@${rand_name}.ipa" //upload.starfiles.co/file
+        curl -F "upload=@${rand_name}.ipa" https//upload.starfiles.co/file
         echo "All done!"
