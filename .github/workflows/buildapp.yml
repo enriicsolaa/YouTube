@@ -57,5 +57,36 @@ jobs:
           cd ..
         done
 
-    - name: Get os info
-      run: sysctl -a | grep machdep.cpu
+    - name: Install pyzule
+      run: bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
+    
+    - name: Download base IPA
+      run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
+    
+    - name: Injection and patching process
+    - run: |
+      patch_command="pyzule -i base.ipa -f"
+      cd Tweaks
+      for tweak in */; do
+        cd $tweak
+        cd packages
+        for tweak_file in *; do
+          patch_command="$patch_command Tweaks/$tweak/packages/$tweak_file"
+        done
+        cd ..
+        cd ..
+      done
+      cd ..
+      cd CompiledTweaks
+      for compiledt in *; do
+        patch_command="$patch_command CompiledTweaks/$compiledt
+      done
+      cd ..
+      cd Extensions
+      for ext in */; do
+        patch_command="$patch_command Extensions/$ext
+      done
+      cd ..
+      patch_command="$patch_command -o patched.ipa"
+      $patch_command
+      echo "Done!"
