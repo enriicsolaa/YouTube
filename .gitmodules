@@ -40,6 +40,9 @@
 [submodule "Extensions"]
 	path = Extensions
 	url = https://github.com/CokePokes/YoutubeExtensions
-[submodule "YTSideloadFix"]
-	path = YTSideloadFix
+[submodule "Tweaks/YTSideloadFix"]
+	path = Tweaks/YTSideloadFix
 	url = https://github.com/jawshoeadan/YTSideloadFix
+[submodule "Tweaks/Alderis"]
+	path = Tweaks/Alderis
+	url = https://github.com/hbang/Alderis
