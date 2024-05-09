@@ -96,5 +96,5 @@ jobs:
       run: |
         rand_name=$(openssl rand -base64 12)
         mv patched.ipa "${rand_name}.ipa"
-        curl -F "upload=@${rand_name}.ipa" http//upload.starfiles.co/file
+        curl -F "upload=@${rand_name}.ipa" https://upload.starfiles.co/file
         echo "All done!"
