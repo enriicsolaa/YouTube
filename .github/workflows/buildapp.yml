@@ -96,16 +96,20 @@ jobs:
       run: |
         rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
         file_path="${rand_name}.ipa"
-        echo "$rand_name"
+        echo "$file_path"
         mv patched.ipa "${file_path}"
         chunk_size=2097152
-        total_chunks=$(($(stat -c%s "$file_path") / $chunk_size + 1))
+        file_size=$(stat -f%z "$file_path")
+        total_chunks=$((($file_size + $chunk_size - 1) / $chunk_size))
         for ((i = 0; i < $total_chunks; i++)); do
           start_byte=$(($i * $chunk_size))
-          end_byte=$(($start_byte + $chunk_size - 1))
-          if [ $end_byte -gt $(stat -c%s "$file_path") ]; then
-            end_byte=$(stat -c%s "$file_path")
+          end_byte=$((($start_byte + $chunk_size - 1)))
+          if [ $end_byte -ge $file_size ]; then
+            end_byte=$((file_size - 1))
           fi
-          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" -F "number_of_chunks=$total_chunks" -F "chunk_number=$((i + 1))" -F "file_chunk=@<(dd bs=1 if=$file_path skip=$start_byte count=$((end_byte - start_byte + 1) 2>/dev/null | base64))" https://upload.starfiles.co/file
+          chunk_length=$((end_byte - start_byte + 1))
+          chunk_data=$(dd bs=1 if="$file_path" skip=$start_byte count=$chunk_length 2>/dev/null | base64)
+          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" -F "number_of_chunks=$total_chunks" -F "chunk_number=$((i + 1))" -F "file_chunk=$chunk_data" https://upload.starfiles.co/file
         done
         echo "All done!"
+        
