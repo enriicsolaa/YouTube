@@ -98,5 +98,6 @@ jobs:
         echo "$rand_name"
         mv patched.ipa "${rand_name}.ipa"
         pip install starfiles
+        chmod +x upload.py
         $PYTHON upload.py "{$rand_name}.ipa"
         echo "All done!"
