@@ -62,7 +62,7 @@ jobs:
       run: bash -c "$(curl https://raw.githubusercontent.com/asdfzxcvbn/pyzule/main/install-pyzule.sh)"
     
     - name: Download base IPA
-      run: wget -O base.ipa https://starfilesdl.com/279ae94974eb
+      run: wget -O base.ipa https://github.com/enriicsolaa/YouTube/releases/download/v1.0.0/YouTube-v19.19.7-AppTesters.ipa
     
     - name: Injection and patching process
       run: |
