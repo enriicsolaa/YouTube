@@ -1,5 +1,5 @@
 import argparse
-import starfiles
+import starfilese
 
 def upload_file(file_path):
     link = starfiles.upload(file_path)
