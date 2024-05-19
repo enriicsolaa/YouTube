@@ -92,27 +92,22 @@ jobs:
         $patch_command
         echo "Injection done!"
 
-    - name: Upload ipa
-      run: |
-        rand_name=$(openssl rand -hex 9 | base64 | tr -dc 'a-zA-Z0-9')
-        file_path="${rand_name}.ipa"
-        echo "$file_path"
-        mv patched.ipa "${file_path}"
-        chunk_size=2097152
-        file_size=$(stat -f%z "$file_path")
-        total_chunks=$((($file_size + $chunk_size - 1) / $chunk_size))
-        for ((i = 0; i < $total_chunks; i++)); do
-          start_byte=$(($i * $chunk_size))
-          end_byte=$((($start_byte + $chunk_size - 1)))
-          if [ $end_byte -ge $file_size ]; then
-            end_byte=$((file_size - 1))
-          fi
-          chunk_length=$((end_byte - start_byte + 1))
-          chunk_data=$(dd bs=1 if="$file_path" skip=$start_byte count=$chunk_length 2>/dev/null | base64)
-          curl -F "upload=@$file_path;filename=$(basename $file_path);type=$(file -b --mime-type $file_path)" \
-              -F "number_of_chunks=$total_chunks" \
-              -F "chunk_number=$((i + 1))" \
-              -F "file_chunk=$chunk_data" \
-              https://upload.starfiles.co/file
-        done
-        echo "All done!"
+    - name: Upload Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: patched-ipa-${{ github.sha }}
+        release_name: "Patched IPA ${{ github.sha }}"
+        draft: false
+        prerelease: false
+
+    - name: Upload ipa to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./patched.ipa
+        asset_name: patched.ipa
+        asset_content_type: application/octet-stream
