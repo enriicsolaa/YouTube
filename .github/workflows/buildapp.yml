@@ -97,7 +97,7 @@ jobs:
 
     - name: 'Upload release'
       run: |
-        gh release upload ${{github.event.release.tag_name}} patched.ipa
+        gh release upload v1.0.1 patched.ipa
       env:
         GITHUB_TOKEN: ${{ github.TOKEN }}
 
